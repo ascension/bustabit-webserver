@@ -140,7 +140,7 @@ function tableDev() {
 function requestDevOtt(id, callback) {
     var curl = require('curlrequest');
     var options = {
-        url: 'https://www.bustabit.com/ott',
+        url: 'https://www.coinrocket.co/ott',
         include: true ,
         method: 'POST',
         'cookie': 'id='+id

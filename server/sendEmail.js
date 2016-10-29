@@ -51,10 +51,10 @@ exports.passwordReset = function(to, recoveryList, callback) {
     var html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' +
         '<html xmlns="http://www.w3.org/1999/xhtml">' +
         '<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' +
-        '<title>MoneyPot</title>' +
+        '<title>coinRocket</title>' +
         '</head>' +
         '<body>'+
-        '<h2>Bustabit Password recovery</h2>' +
+        '<h2>coinRocket Password recovery</h2>' +
         '<br>' +
          htmlRecoveryLinks +
         '<br>' +
@@ -64,8 +64,8 @@ exports.passwordReset = function(to, recoveryList, callback) {
 
     var details =  {
         to: to,
-        from: 'noreply@moneypot.com',
-        subject: 'Bustabit.com - Reset Password Request',
+        from: 'noreply@coinrocket.co',
+        subject: 'coinRocket.com - Reset Password Request',
         html: html
 
     };
