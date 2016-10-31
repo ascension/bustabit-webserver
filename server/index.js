@@ -101,6 +101,7 @@ app.use(function(req, res, next) {
     debug('incoming http request');
 
     var sessionId = req.cookies.id;
+    console.error('[COOKIE]', req.cookies);
 
     if (!sessionId) {
         res.header('Vary', 'Accept, Accept-Encoding, Cookie');
@@ -121,6 +122,7 @@ app.use(function(req, res, next) {
         if (err) {
             res.clearCookie('id');
             if (err === 'NOT_VALID_SESSION') {
+                console.error('[NOT_VALID_SESSION]');
                 return res.redirect('/');
             } else {
                 console.error('[INTERNAL_ERROR] Unable to get user by session id ' + sessionId + ':', err);
