@@ -110,7 +110,7 @@ exports.login = function(req, res, next) {
 
             if(remember)
                 sessionOptions.expires = expires;
-
+            console.log('Logging User In: ', sessionId);
             res.cookie('id', sessionId, sessionOptions);
             res.redirect('/');
         });
