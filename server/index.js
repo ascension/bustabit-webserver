@@ -2,6 +2,7 @@ var fs = require('fs');
 
 var express = require('express');
 var http = require('http');
+var https = require('https');
 var assert = require('assert');
 var compression = require('compression');
 var path = require('path');
@@ -20,6 +21,11 @@ var Chat = require('./chat');
 var lib = require('./lib');
 
 debug('booting bustabit webserver');
+
+var httpsOptions = {
+    key: fs.readFileSync("ssl.key"),
+    cert: fs.readFileSync("ssl.crt")
+};
 
 /** TimeAgo Settings:
  * Simplify and de-verbosify timeago output.
@@ -174,6 +180,11 @@ app.use(errorHandler);
 
 /**  Server **/
 var server = http.createServer(app);
+
+https.createServer(httpsOptions, app).listen(app.get('port'), function() {
+    console.log('Express HTTPS server listening on port ' + app.get('port'));
+});
+
 var io = socketIO(server); //Socket io must be after the lat app.use
 io.use(ioCookieParser);
 
