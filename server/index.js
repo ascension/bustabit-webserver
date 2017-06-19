@@ -13,6 +13,8 @@ var ioCookieParser = require('socket.io-cookie');
 var _ = require('lodash');
 var debug = require('debug')('app:index');
 var app = express();
+var httpApp = express();
+
 
 var config = require('../config/config');
 var routes = require('./routes');
@@ -26,6 +28,10 @@ var httpsOptions = {
     key: fs.readFileSync("ssl.key"),
     cert: fs.readFileSync("ssl.crt")
 };
+httpApp.set('port', process.env.PORT || 80);
+httpApp.get("*", function (req, res, next) {
+    res.redirect("https://" + req.headers.host + "/" + req.path);
+});
 
 /** TimeAgo Settings:
  * Simplify and de-verbosify timeago output.
@@ -180,6 +186,10 @@ app.use(errorHandler);
 
 /**  Server **/
 var server = http.createServer(app);
+
+http.createServer(app).listen(app.get('port'), function() {
+    console.log('Express HTTP server listening on port ' + app.get('port'));
+});
 
 https.createServer(httpsOptions, app).listen(app.get('port'), function() {
     console.log('Express HTTPS server listening on port ' + app.get('port'));
